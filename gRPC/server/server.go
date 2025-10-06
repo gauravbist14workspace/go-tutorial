@@ -1,0 +1,63 @@
+package main
+
+import (
+	"context"
+	"log"
+	"net"
+	"time"
+
+	pb "grpc_demo/proto"
+
+	"google.golang.org/grpc"
+)
+
+type Server struct {
+	pb.UnimplementedCoffeeShopServer
+}
+
+func (s *Server) GetMenu(menuRequest *pb.MenuRequest, svr pb.CoffeeShop_GetMenuServer) error {
+	items := []*pb.Item{
+		{Name: "Espresso", Id: "1"},
+		{Name: "Cappuccino", Id: "2"},
+		{Name: "Latte", Id: "3"},
+	}
+
+	for i, _ := range items {
+		// svr.Send(&pb.Menu{Items: items[i:i+1]})
+		svr.Send(&pb.Menu{Items: items[0 : i+1]})
+		time.Sleep(2 * time.Second) // simulate some delay
+	}
+
+	return nil
+}
+
+func (s *Server) PlaceOrder(context.Context, *pb.Order) (*pb.Receipt, error) {
+	return &pb.Receipt{
+		Id: "some dummy id",
+	}, nil
+}
+
+func (s *Server) GetOrderStatus(context.Context, *pb.Receipt) (*pb.OrderStatus, error) {
+	return &pb.OrderStatus{
+		OrderId: "ABC123",
+		Status:  "IN PROGRESS",
+	}, nil
+}
+
+func main() {
+	// setup listener on PORT 9000
+	lis, err := net.Listen("tcp", ":9000")
+	if err != nil {
+		log.Fatalf("Fail to listen on port 9000 %v", err)
+	}
+
+	grpcServer := grpc.NewServer()
+	// Now bind our server to grpcServer
+	pb.RegisterCoffeeShopServer(grpcServer, &Server{})
+
+	if err := grpcServer.Serve(lis); err != nil {
+		log.Fatalf("Failed to serve gRPC server: %v", err)
+	}
+
+	log.Println("gRPC server is running on port 9000")
+}
