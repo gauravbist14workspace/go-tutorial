@@ -4,6 +4,9 @@ import (
 	"context"
 	"log"
 	"net"
+	"os"
+	"os/signal"
+	"syscall"
 	"time"
 
 	pb "grpc_demo/proto"
@@ -55,9 +58,20 @@ func main() {
 	// Now bind our server to grpcServer
 	pb.RegisterCoffeeShopServer(grpcServer, &Server{})
 
-	if err := grpcServer.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve gRPC server: %v", err)
-	}
+	go func() {
+		log.Println("gRPC server is running on port 9000")
+		if err := grpcServer.Serve(lis); err != nil {
+			log.Fatalf("Failed to serve gRPC server: %v", err)
+		}
+	}()
 
-	log.Println("gRPC server is running on port 9000")
+	// Wait for Ctrl+C or SIGTERM
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
+	<-quit
+
+	log.Println("Shutting down gRPC server...")
+	grpcServer.GracefulStop()
+	log.Println("gRPC server stopped gracefully")
+
 }

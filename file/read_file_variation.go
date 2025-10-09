@@ -2,11 +2,26 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
 	"time"
 )
+
+type AlertType string
+
+const (
+	BatteryOut    AlertType = "BATTERY_OUT"
+	ConsumableOut AlertType = "CONSUMABLE_OUT"
+)
+
+type Alert struct {
+	AlertId    string
+	DeviceName string
+	Type       AlertType
+	Date       time.Time
+}
 
 func main() {
 
@@ -19,13 +34,21 @@ func main() {
 }
 
 func readFileInOneGo() {
-	b, err := os.ReadFile("file/dummy.txt")
+	b, err := os.ReadFile("file/alert.json")
 	if err != nil {
 		fmt.Println("Some error while reading file in one go")
 		return
 	}
 
-	fmt.Println(string(b))
+	// fmt.Println(string(b))
+
+	var alert Alert
+	err = json.Unmarshal(b, &alert)
+	if err != nil {
+		fmt.Println("failed to unmarshall the json with err: ", err)
+	}
+
+	fmt.Printf("read the following json from file: %v", alert)
 }
 
 func readFileLineByLine() {
