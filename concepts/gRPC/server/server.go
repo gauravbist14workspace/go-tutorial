@@ -14,11 +14,11 @@ import (
 	"google.golang.org/grpc"
 )
 
-type Server struct {
+type ServerImplementation struct {
 	pb.UnimplementedCoffeeShopServer
 }
 
-func (s *Server) GetMenu(menuRequest *pb.MenuRequest, svr pb.CoffeeShop_GetMenuServer) error {
+func (s *ServerImplementation) GetMenu(menuRequest *pb.MenuRequest, svr pb.CoffeeShop_GetMenuServer) error {
 	items := []*pb.Item{
 		{Name: "Espresso", Id: "1"},
 		{Name: "Cappuccino", Id: "2"},
@@ -34,13 +34,13 @@ func (s *Server) GetMenu(menuRequest *pb.MenuRequest, svr pb.CoffeeShop_GetMenuS
 	return nil
 }
 
-func (s *Server) PlaceOrder(context.Context, *pb.Order) (*pb.Receipt, error) {
+func (s *ServerImplementation) PlaceOrder(context.Context, *pb.Order) (*pb.Receipt, error) {
 	return &pb.Receipt{
 		Id: "some dummy id",
 	}, nil
 }
 
-func (s *Server) GetOrderStatus(context.Context, *pb.Receipt) (*pb.OrderStatus, error) {
+func (s *ServerImplementation) GetOrderStatus(context.Context, *pb.Receipt) (*pb.OrderStatus, error) {
 	return &pb.OrderStatus{
 		OrderId: "ABC123",
 		Status:  "IN PROGRESS",
@@ -56,7 +56,7 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 	// Now bind our server to grpcServer
-	pb.RegisterCoffeeShopServer(grpcServer, &Server{})
+	pb.RegisterCoffeeShopServer(grpcServer, &ServerImplementation{})
 
 	go func() {
 		log.Println("gRPC server is running on port 9000")

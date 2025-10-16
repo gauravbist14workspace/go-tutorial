@@ -25,7 +25,7 @@ type Alert struct {
 
 func main() {
 
-	// readFileInOneGo()
+	// readJSONFileInOneGo()
 
 	// readFileLineByLine()
 
@@ -33,7 +33,7 @@ func main() {
 
 }
 
-func readFileInOneGo() {
+func readJSONFileInOneGo() {
 	b, err := os.ReadFile("file/alert.json")
 	if err != nil {
 		fmt.Println("Some error while reading file in one go")

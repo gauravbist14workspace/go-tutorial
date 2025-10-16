@@ -1,7 +1,7 @@
 package main
 
 //import wg1 "go_tutorial/async/wait_group"
-import channel "go_tutorial/async/channel"
+import channel "go_tutorial/concepts/async/channel"
 
 func main() {
 	// goRoutineDemo()

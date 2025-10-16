@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	bb "go_tutorial/bit_bool"
+	bb "go_tutorial/concepts/bit_bool"
 )
 
 func testingBitBoolImplementation() {

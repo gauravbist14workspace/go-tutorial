@@ -21,4 +21,4 @@ func main() {
 }
 ```
 ## This import line imports all files inside the "/bit_bool" directory
-## And if they have function starting with CAPITAL LETTERS, they will be usable from main.go#
+## And if they have function starting with CAPITAL LETTERS, they will be usable from main.go

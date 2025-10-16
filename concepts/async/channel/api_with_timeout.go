@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	model "go_tutorial/async/channel/models"
+	model "go_tutorial/concepts/async/channel/models"
 )
 
 func APICall1(ch chan<- model.APIResponse) {

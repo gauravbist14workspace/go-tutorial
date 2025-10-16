@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	client "go_tutorial/http-server/client"
-	server "go_tutorial/http-server/server"
+	client "go_tutorial/concepts/http-server/client"
+	server "go_tutorial/concepts/http-server/server"
 )
 
 func main() {
