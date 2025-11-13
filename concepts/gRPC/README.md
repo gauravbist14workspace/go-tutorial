@@ -35,6 +35,6 @@
 
 Now to start using the code from generated files, like marshaling or the protocol buffer related code, you need to get these 2 libraries as well:
 ```go
-	go get google.golang.org/protobuf/proto
+	go get google.golang.org/protobuf/proto		// only if required
 	go get google.golang.org/grpc
 ```

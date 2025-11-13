@@ -1,0 +1,10 @@
+Line 1: The quick brown fox jumps over the lazy dog.
+Line 2: Lorem ipsum dolor sit amet.
+Line 3: Go is an open source programming language.
+Line 4: This is a dummy line for testing.
+Line 5: Another line of sample text.
+Line 6: Reading files in Go is easy.
+Line 7: Yet another line to fill space.
+Line 8: Line eight just wants to say hi.
+Line 9: Almost done reading lines.
+Line 10: This is the last line in the file.

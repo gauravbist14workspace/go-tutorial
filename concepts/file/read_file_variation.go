@@ -33,6 +33,8 @@ func main() {
 
 }
 
+// reads entire file in one-go by dumping all bytes into the RAM.
+// not an OPTIMAL way to read large files.
 func readJSONFileInOneGo() {
 	b, err := os.ReadFile("file/alert.json")
 	if err != nil {
