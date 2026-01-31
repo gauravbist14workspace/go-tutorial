@@ -1,7 +1,10 @@
 package client
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	models "go_tutorial/concepts/http-server/models"
 	"io"
 	"net/http"
 )
@@ -10,7 +13,15 @@ func NewClient() {
 	clientConn := &http.Client{}
 	fmt.Println("Created a new client object")
 
-	greetReq, err := http.NewRequest(http.MethodGet, "http://localhost:8080/hello/bob", nil)
+	user := models.User{Name: "bob", Age: 23}
+	jsonBytes, err := json.Marshal(user)
+	if err != nil {
+		fmt.Println("unable to parse the user object, err: ", err)
+		return
+	}
+
+	reqBody := bytes.NewReader(jsonBytes)
+	greetReq, err := http.NewRequest(http.MethodGet, "http://localhost:8080/hello/bob", reqBody)
 	if err != nil {
 		fmt.Println("err: ", err)
 		return
