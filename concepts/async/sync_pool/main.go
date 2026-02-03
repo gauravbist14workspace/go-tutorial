@@ -13,7 +13,7 @@ func main() {
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
 		go func() {
-			obj := pool.Get().([]byte) // Get a byte slice from the pool
+			obj := pool.Get().([]byte) // Get a byte slice from the pool after type casting
 			fmt.Print("-")
 
 			time.Sleep(100 * time.Millisecond) // Simulate some work
