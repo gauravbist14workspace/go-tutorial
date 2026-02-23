@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-func main() {
+func WriteIntoFile(filePath string) {
 	// write code to write into dummy.txt file
-	file, err := os.Create("file/dummy2.txt")
+	file, err := os.Create(filePath)
 	if err != nil {
 		fmt.Printf("failed to create file: %s", err)
 	}

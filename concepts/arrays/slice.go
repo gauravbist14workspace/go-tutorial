@@ -18,4 +18,12 @@ func slice_practise() {
 	// Append to a slice
 	slice2 = append(slice2, 20)
 	fmt.Println(slice2) // Output: [10 0 0 20]
+
+	// -------------------------------------------------------------
+	// Initiate a 2D slice for let's say dynammic_programming
+	rows, cols := 3, 4
+	dp := make([][]int, rows)
+	for i := range dp {
+		dp[i] = make([]int, cols)
+	}
 }

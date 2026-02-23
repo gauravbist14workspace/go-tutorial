@@ -14,4 +14,14 @@ func array_practise() {
 
 	arr3 := [...]int{1, 2, 3, 4, 5}                    // Array with inferred size
 	fmt.Printf("%v %v %v", arr3, len(arr3), cap(arr3)) // Output: [1 2 3 4 5]
+
+	// ------------------------------------------------------------------------------------
+
+	// one way to initiate a 2D array
+	fixed_2d_array := [3][4]int{
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+	}
+
 }

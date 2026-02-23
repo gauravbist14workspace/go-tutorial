@@ -30,7 +30,7 @@ func main() {
 	// readFileLineByLine()
 
 	readFileInBytes()
-
+	WriteIntoFile("file/dummy2.txt")
 }
 
 // reads entire file in one-go by dumping all bytes into the RAM.
@@ -72,7 +72,7 @@ func readFileLineByLine() {
 func readFileInBytes() {
 	file, err := os.Open("file/dummy.txt")
 	if err != nil {
-		fmt.Println("Some error while reading file line by line")
+		fmt.Printf("error while reading file in bytes %v", err)
 		return
 	}
 	defer file.Close()
@@ -82,7 +82,7 @@ func readFileInBytes() {
 	for {
 		n, err := file.Read(chunk)
 		if err != nil && err != io.EOF {
-			fmt.Println("Some error while reading file line by line")
+			fmt.Println("error while reading file chunk by chunk, err = %v", err)
 		}
 
 		if n == 0 {
